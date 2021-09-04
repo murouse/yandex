@@ -21,41 +21,41 @@ const int MAX=1000;
 
 class matr{
     private:
-        int *p; //указатель на массив
+        int *p; //СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РјР°СЃСЃРёРІ
     public:
-        matr(); //конструктор 
-        matr(const matr &r); //конструктор копиравания
-        matr(const int *r); //конструктор инициализации
-        ~matr(); //деструктор
+        matr(); //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ 
+        matr(const matr &r); //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂР°РІР°РЅРёСЏ
+        matr(const int *r); //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё
+        ~matr(); //РґРµСЃС‚СЂСѓРєС‚РѕСЂ
         
-        void print(); //вывод состояния
-        void fprint(ofstream &f); //вывод состояния в файл
-        void info(matr &r); //информация
-        int& operator ()(int i, int j); //индекс координат
-        matr& operator =(const matr &r); //присваивание
-        bool operator ==(const matr &r); //сравнение
-        bool operator !=(const matr &r); //сравнение
-        static matr random(); //случайное состояние
-        static matr right(); //упорядоченное состояние
+        void print(); //РІС‹РІРѕРґ СЃРѕСЃС‚РѕСЏРЅРёСЏ
+        void fprint(ofstream &f); //РІС‹РІРѕРґ СЃРѕСЃС‚РѕСЏРЅРёСЏ РІ С„Р°Р№Р»
+        void info(matr &r); //РёРЅС„РѕСЂРјР°С†РёСЏ
+        int& operator ()(int i, int j); //РёРЅРґРµРєСЃ РєРѕРѕСЂРґРёРЅР°С‚
+        matr& operator =(const matr &r); //РїСЂРёСЃРІР°РёРІР°РЅРёРµ
+        bool operator ==(const matr &r); //СЃСЂР°РІРЅРµРЅРёРµ
+        bool operator !=(const matr &r); //СЃСЂР°РІРЅРµРЅРёРµ
+        static matr random(); //СЃР»СѓС‡Р°Р№РЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ
+        static matr right(); //СѓРїРѕСЂСЏРґРѕС‡РµРЅРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ
         
-        float h_distance(matr &r); //скольжений нужно совершить
-        float h_place(matr &r); //меток не на своих местах
-        float h_part(matr &r); //строк/столбцов не собрано
-        float heuristic(matr &r); //эвристики
-        bool parity(); //четность
-        int ind(int k); //индекс
-        int di(int k); //индекс i
-        int dj(int k); //индекс j
-        bool search(); //поиск
-        matr move(int k); //перемещение
-        matr mix(); //перемешать
+        float h_distance(matr &r); //СЃРєРѕР»СЊР¶РµРЅРёР№ РЅСѓР¶РЅРѕ СЃРѕРІРµСЂС€РёС‚СЊ
+        float h_place(matr &r); //РјРµС‚РѕРє РЅРµ РЅР° СЃРІРѕРёС… РјРµСЃС‚Р°С…
+        float h_part(matr &r); //СЃС‚СЂРѕРє/СЃС‚РѕР»Р±С†РѕРІ РЅРµ СЃРѕР±СЂР°РЅРѕ
+        float heuristic(matr &r); //СЌРІСЂРёСЃС‚РёРєРё
+        bool parity(); //С‡РµС‚РЅРѕСЃС‚СЊ
+        int ind(int k); //РёРЅРґРµРєСЃ
+        int di(int k); //РёРЅРґРµРєСЃ i
+        int dj(int k); //РёРЅРґРµРєСЃ j
+        bool search(); //РїРѕРёСЃРє
+        matr move(int k); //РїРµСЂРµРјРµС‰РµРЅРёРµ
+        matr mix(); //РїРµСЂРµРјРµС€Р°С‚СЊ
 };
 
 vector<matr> arr;
 stack<matr> way;
 stack<int> hist;
 
-matr matr::mix(){ //перемешать
+matr matr::mix(){ //РїРµСЂРµРјРµС€Р°С‚СЊ
     matr tmp(*this);
 
     int i,j,k;
@@ -66,29 +66,29 @@ matr matr::mix(){ //перемешать
         j=tmp.dj(0);
         
         switch(k){
-            case 0: //вверх
+            case 0: //РІРІРµСЂС…
             {
                 if (i!=0) swap(tmp(i,j),tmp(i-1,j));
                 break;    
             }
-            case 1: //вниз
+            case 1: //РІРЅРёР·
             {
                 if (i!=N-1) swap(tmp(i,j),tmp(i+1,j));
                 break;     
             }
-            case 2: //влево
+            case 2: //РІР»РµРІРѕ
             {
                 if (j!=0) swap(tmp(i,j),tmp(i,j-1));
                 break;    
             }
-            case 3: //вправо
+            case 3: //РІРїСЂР°РІРѕ
             {
                 if (j!=M-1) swap(tmp(i,j),tmp(i,j+1));
                 break;     
             }  
             default:
             {
-                cout<<"Error: Ошибка перемешивания"; 
+                cout<<"Error: РћС€РёР±РєР° РїРµСЂРµРјРµС€РёРІР°РЅРёСЏ"; 
                 exit(1);
             }
         }
@@ -96,15 +96,15 @@ matr matr::mix(){ //перемешать
     return tmp;
 }
 
-void matr::info(matr &r){ //информаиця
-    cout<<"= "<<parity()<<" и "<<r.parity()<<" четности"<<endl;
-    cout<<"= "<<h_distance(r)<<" скольжений нужно совершить"<<endl;
-    cout<<"= "<<h_place(r)<<" меток не на своих местах"<<endl;
-    cout<<"= "<<h_part(r)<<" строк/столбцов не собрано"<<endl;
-    cout<<"= "<<heuristic(r)<<" оценка эвристиками"<<endl;
+void matr::info(matr &r){ //РёРЅС„РѕСЂРјР°РёС†СЏ
+    cout<<"= "<<parity()<<" Рё "<<r.parity()<<" С‡РµС‚РЅРѕСЃС‚Рё"<<endl;
+    cout<<"= "<<h_distance(r)<<" СЃРєРѕР»СЊР¶РµРЅРёР№ РЅСѓР¶РЅРѕ СЃРѕРІРµСЂС€РёС‚СЊ"<<endl;
+    cout<<"= "<<h_place(r)<<" РјРµС‚РѕРє РЅРµ РЅР° СЃРІРѕРёС… РјРµСЃС‚Р°С…"<<endl;
+    cout<<"= "<<h_part(r)<<" СЃС‚СЂРѕРє/СЃС‚РѕР»Р±С†РѕРІ РЅРµ СЃРѕР±СЂР°РЅРѕ"<<endl;
+    cout<<"= "<<heuristic(r)<<" РѕС†РµРЅРєР° СЌРІСЂРёСЃС‚РёРєР°РјРё"<<endl;
 }
 
-bool matr::search(){ //true-нашлось; false-не нашлось, добавилось
+bool matr::search(){ //true-РЅР°С€Р»РѕСЃСЊ; false-РЅРµ РЅР°С€Р»РѕСЃСЊ, РґРѕР±Р°РІРёР»РѕСЃСЊ
     bool f=true;
     int i=0;
     while (f && i<arr.size()){
@@ -120,25 +120,25 @@ bool matr::search(){ //true-нашлось; false-не нашлось, добавилось
     }
 }
 
-matr::matr(){ //конструктор
+matr::matr(){ //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
     p=new int[N*M];  
 }
 
-matr::matr(const matr &r){ //конструктор копирования
+matr::matr(const matr &r){ //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ
     p=new int[N*M];
     for (int i=0; i<N*M; i++) p[i]=r.p[i];
 }
 
-matr::matr(const int *r){ //конструктор инициализации
+matr::matr(const int *r){ //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё
     p=new int[N*M];
     for (int i=0; i<N*M; i++) p[i]=r[i];
 }
 
-matr::~matr(){ //деструктор
+matr::~matr(){ //РґРµСЃС‚СЂСѓРєС‚РѕСЂ
     delete[] p;
 }
 
-void matr::print(){ //вывод состояния
+void matr::print(){ //РІС‹РІРѕРґ СЃРѕСЃС‚РѕСЏРЅРёСЏ
     for (int i=0; i<M; i++) cout<<"-----"; cout<<"-"<<endl;
     
     for (int i=0; i<N; i++){
@@ -150,7 +150,7 @@ void matr::print(){ //вывод состояния
     }    
 }
 
-void matr::fprint(ofstream &f){ //вывод состояния в файл
+void matr::fprint(ofstream &f){ //РІС‹РІРѕРґ СЃРѕСЃС‚РѕСЏРЅРёСЏ РІ С„Р°Р№Р»
     for (int i=0; i<M; i++) f<<"-----"; f<<"-"<<endl;
     
     for (int i=0; i<N; i++){
@@ -163,21 +163,21 @@ void matr::fprint(ofstream &f){ //вывод состояния в файл
     
 }
 
-void fout(ofstream &f){ //вывод данных в файл
+void fout(ofstream &f){ //РІС‹РІРѕРґ РґР°РЅРЅС‹С… РІ С„Р°Р№Р»
     
     f.open("way.txt");
     
-    if (!f.is_open()) cout<<"Error: Ошибка открытия файла";
+    if (!f.is_open()) cout<<"Error: РћС€РёР±РєР° РѕС‚РєСЂС‹С‚РёСЏ С„Р°Р№Р»Р°";
     else{
         int k,i=0;
         while (!hist.empty()){
             i++;
             f<<i<<") ";
             switch (hist.top()){
-                case 0: f<<"вверх"<<endl; break;
-                case 1: f<<"вниз"<<endl; break;
-                case 2: f<<"влево"<<endl; break;
-                case 3: f<<"вправо"<<endl; break;
+                case 0: f<<"РІРІРµСЂС…"<<endl; break;
+                case 1: f<<"РІРЅРёР·"<<endl; break;
+                case 2: f<<"РІР»РµРІРѕ"<<endl; break;
+                case 3: f<<"РІРїСЂР°РІРѕ"<<endl; break;
             }
         hist.pop();
         }
@@ -185,42 +185,42 @@ void fout(ofstream &f){ //вывод данных в файл
         i=0;
         while (!way.empty()){
             i++;
-            f<<"Шаг "<<i<<":"<<endl;
+            f<<"РЁР°Рі "<<i<<":"<<endl;
             way.top().fprint(f);
             f<<endl;
             way.pop();
         }
         
         f.close();
-        cout<<"Данные успешно записаны в файл: "<<"way.txt";
+        cout<<"Р”Р°РЅРЅС‹Рµ СѓСЃРїРµС€РЅРѕ Р·Р°РїРёСЃР°РЅС‹ РІ С„Р°Р№Р»: "<<"way.txt";
         
     }
     
 }
 
-int& matr::operator()(int i, int j){ //индекс координат
+int& matr::operator()(int i, int j){ //РёРЅРґРµРєСЃ РєРѕРѕСЂРґРёРЅР°С‚
     if (i<0 || i>N-1 || j<0 || j>M-1){
-        cout<<"Error: Некорректный индекс"; 
+        cout<<"Error: РќРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ РёРЅРґРµРєСЃ"; 
         exit(1);
     }  
     return p[i*M+j];
 }
 
-matr& matr::operator =(const matr &r){ //присваивание 
+matr& matr::operator =(const matr &r){ //РїСЂРёСЃРІР°РёРІР°РЅРёРµ 
     for (int i=0; i<N*M; i++) p[i]=r.p[i]; 
     return *this;
 }
 
-bool matr::operator ==(const matr &r){ //сравнение
+bool matr::operator ==(const matr &r){ //СЃСЂР°РІРЅРµРЅРёРµ
     for (int i=0; i<N*M; i++) if (p[i]!=r.p[i]) return false;
     return true;
 }
 
-bool matr::operator !=(const matr &r){ //сравнение
+bool matr::operator !=(const matr &r){ //СЃСЂР°РІРЅРµРЅРёРµ
     return !(*this==r);
 }
 
-matr matr::random(){ //случайное состояние
+matr matr::random(){ //СЃР»СѓС‡Р°Р№РЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ
     int arr[N*M];
     
     for (int i=0; i<N*M; i++) arr[i]=i;
@@ -229,7 +229,7 @@ matr matr::random(){ //случайное состояние
     return matr(arr);
 }
 
-matr matr::right(){ //упорядоченное состояние
+matr matr::right(){ //СѓРїРѕСЂСЏРґРѕС‡РµРЅРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ
     int arr[N*M];
     
     arr[N*M-1]=0;
@@ -238,80 +238,80 @@ matr matr::right(){ //упорядоченное состояние
     return matr(arr);    
 }
 
-int matr::ind(int k){ //индекс    
+int matr::ind(int k){ //РёРЅРґРµРєСЃ    
     for (int i=0; i<N*M; i++) if (p[i]==k) return i;
-    cout<<"Error: Ошибка поиска"; 
+    cout<<"Error: РћС€РёР±РєР° РїРѕРёСЃРєР°"; 
     exit(1);
 }
 
-int matr::di(int k){ //индекс i
+int matr::di(int k){ //РёРЅРґРµРєСЃ i
     return ind(k)/M;
 }
 
-int matr::dj(int k){ //индекс j
+int matr::dj(int k){ //РёРЅРґРµРєСЃ j
     return ind(k)%M;
 }
 
-matr matr::move(int k){ //перемещение
+matr matr::move(int k){ //РїРµСЂРµРјРµС‰РµРЅРёРµ
     matr tmp(*this);
     int i=tmp.di(0);
     int j=tmp.dj(0);
     
     switch(k){
-        case 0: //вверх
+        case 0: //РІРІРµСЂС…
         {
             if (i!=0) swap(tmp(i,j),tmp(i-1,j));
             break;    
         }
-        case 1: //вниз
+        case 1: //РІРЅРёР·
         {
             if (i!=N-1) swap(tmp(i,j),tmp(i+1,j));
             break;     
         }
-        case 2: //влево
+        case 2: //РІР»РµРІРѕ
         {
             if (j!=0) swap(tmp(i,j),tmp(i,j-1));
             break;    
         }
-        case 3: //вправо
+        case 3: //РІРїСЂР°РІРѕ
         {
             if (j!=M-1) swap(tmp(i,j),tmp(i,j+1));
             break;     
         }  
         default:
         {
-            cout<<"Error: Ошибка перемещения"; 
+            cout<<"Error: РћС€РёР±РєР° РїРµСЂРµРјРµС‰РµРЅРёСЏ"; 
             exit(1);
         }
     }
     return tmp;
 }
 
-bool matr::parity(){ //четность
+bool matr::parity(){ //С‡РµС‚РЅРѕСЃС‚СЊ
     int k=0;
     for (int i=0; i<N*M-1; i++)
         for (int j=i+1; j<N*M; j++)
             if (p[i]>p[j] && p[j]!=0) k++;
             
     k+=ind(0)/M+1;
-    return k%2; //0-чет, 1-нечет
+    return k%2; //0-С‡РµС‚, 1-РЅРµС‡РµС‚
 }
 
-float matr::h_distance(matr &r){ //скольжений нужно совершить
+float matr::h_distance(matr &r){ //СЃРєРѕР»СЊР¶РµРЅРёР№ РЅСѓР¶РЅРѕ СЃРѕРІРµСЂС€РёС‚СЊ
     float sum=0;
     for (int i=0; i<N*M; i++) 
         sum+=abs(di(i)-r.di(i))+abs(dj(i)-r.dj(i));
     return sum;
 }
 
-float matr::h_place(matr &r){ //меток не на своих местах
+float matr::h_place(matr &r){ //РјРµС‚РѕРє РЅРµ РЅР° СЃРІРѕРёС… РјРµСЃС‚Р°С…
     float k=0;
     for (int i=0; i<N*M; i++) 
         if (p[i]!=r.p[i]) k++;
     return k;
 }
 
-float matr::h_part(matr &r){ //строк/столбцов не собрано
+float matr::h_part(matr &r){ //СЃС‚СЂРѕРє/СЃС‚РѕР»Р±С†РѕРІ РЅРµ СЃРѕР±СЂР°РЅРѕ
     float k=0;
     bool f;
     
@@ -334,7 +334,7 @@ float matr::h_part(matr &r){ //строк/столбцов не собрано
     return M+N-k;
 }
 
-float matr::heuristic(matr &r){ //эвристики
+float matr::heuristic(matr &r){ //СЌРІСЂРёСЃС‚РёРєРё
     float mid=N+M;
     mid/=2;
     float distance=h_distance(r)/(N*M*mid);
@@ -354,7 +354,7 @@ void sort(float *h, matr *v, int *o){
     while (f){
         f=false;
         for (int i=0; i<3; i++)
-            if (h[i]>h[i+1]){ //> - вкл
+            if (h[i]>h[i+1]){ //> - РІРєР»
                 f=true;
                 swap(h[i], h[i+1]);
                 swap(v[i], v[i+1]);
@@ -377,7 +377,7 @@ matr &step(matr &l, matr &r){
     
     matr v[4];
     float h[4];
-    int o[4]={0,1,2,3}; //направления движения
+    int o[4]={0,1,2,3}; //РЅР°РїСЂР°РІР»РµРЅРёСЏ РґРІРёР¶РµРЅРёСЏ
         
     for (int i=0; i<4; i++){
         v[i]=l.move(i);
@@ -404,18 +404,18 @@ int main(){
     matr b=matr::right();
     matr a=b.mix();
     
-    cout<<"Состояние А: "<<endl;
+    cout<<"РЎРѕСЃС‚РѕСЏРЅРёРµ Рђ: "<<endl;
     a.print();
-    cout<<"Состояние В: "<<endl;    
+    cout<<"РЎРѕСЃС‚РѕСЏРЅРёРµ Р’: "<<endl;    
     b.print();
-    cout<<"Информация: "<<endl;
+    cout<<"РРЅС„РѕСЂРјР°С†РёСЏ: "<<endl;
     b.info(a);
     
     matr c=step(a,b);
-    cout<<"Получено:"<<endl;
+    cout<<"РџРѕР»СѓС‡РµРЅРѕ:"<<endl;
     c.print();
-    cout<<"Различных состояний просмотрено: "<<arr.size()<<endl;
-    cout<<"Количество перестановок: "<<way.size()<<endl;
+    cout<<"Р Р°Р·Р»РёС‡РЅС‹С… СЃРѕСЃС‚РѕСЏРЅРёР№ РїСЂРѕСЃРјРѕС‚СЂРµРЅРѕ: "<<arr.size()<<endl;
+    cout<<"РљРѕР»РёС‡РµСЃС‚РІРѕ РїРµСЂРµСЃС‚Р°РЅРѕРІРѕРє: "<<way.size()<<endl;
     
     ofstream file;
     fout(file);
